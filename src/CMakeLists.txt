@@ -6,4 +6,4 @@ file(GLOB_RECURSE GLCLASSES_HEADERS "../include/glclasses/*.h")
 add_library(glclasses ${GLCLASSES_SOURCES} ${GLCLASSES_HAEDERS})
 
 target_include_directories(glclasses PUBLIC ../include)
-target_link_libraries(glclasses glad stb)
+target_link_libraries(glclasses PUBLIC glad PRIVATE nlohmann_json::nlohmann_json stb)

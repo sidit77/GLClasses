@@ -5,3 +5,5 @@ target_include_directories(glad PUBLIC "glad/include")
 
 add_library(stb INTERFACE)
 target_include_directories(stb INTERFACE "stb")
+
+add_subdirectory(json)
