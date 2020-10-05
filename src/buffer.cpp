@@ -1,4 +1,4 @@
-#include <GLClasses/buffer.h>
+#include <glclasses/buffer.h>
 
 using namespace glc;
 
