@@ -1,6 +1,7 @@
 #include <fstream>
 #include <sstream>
 #include <iostream>
+#include <filesystem>
 #include <nlohmann/json.hpp>
 #include "glclasses/loader/shaderloading.h"
 
@@ -90,7 +91,9 @@ glc::Program *glc::loader::loadProgramFromFile(const std::string &path) {
 
         auto program = std::make_unique<glc::Program>();
         for(auto& shaderdesc : j["shaders"]){
-            auto shader = std::unique_ptr<glc::Shader>(loadShaderFromFile(shaderdesc["path"], parseShaderType(shaderdesc["type"])));
+            auto shader = std::unique_ptr<glc::Shader>(loadShaderFromFile(
+                    std::filesystem::path(path).remove_filename().concat(shaderdesc["path"].get<std::string>()).string(),
+                    parseShaderType(shaderdesc["type"])));
             glAttachShader(program->id, shader->id);
         }
         if(linkProgram(program.get()))
