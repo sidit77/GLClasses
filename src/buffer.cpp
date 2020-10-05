@@ -1,6 +1,6 @@
 #include <GLClasses/buffer.h>
 
-using namespace wangtiles;
+using namespace glc;
 
 VertexBuffer::VertexBuffer(){
     glCreateBuffers(1, &id);

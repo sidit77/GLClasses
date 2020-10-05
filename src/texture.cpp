@@ -1,8 +1,6 @@
-#include "GLClasses/texture.h"
+#include "glclasses/texture.h"
 
-
-
-using namespace wangtiles;
+using namespace glc;
 
 Texture::Texture(GLenum t) {
     target = t;

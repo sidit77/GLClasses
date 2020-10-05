@@ -1,13 +1,11 @@
 #pragma once
 
-#include <glad/glad.h>
+#include "resource.h"
 #include <string>
-#include "noncopyable.h"
 
-namespace wangtiles{
-    class Texture : private NonCopyable{
+namespace glc {
+    class Texture : public Resource{
     public:
-        GLuint id{};
         GLenum target{};
         explicit Texture(GLenum target);
         explicit Texture(GLsizei width, GLsizei height, GLenum format);

@@ -1,20 +1,17 @@
 #pragma once
 
-#include <glad/glad.h>
-#include "noncopyable.h"
+#include "resource.h"
 
-namespace wangtiles {
-    class VertexBuffer : private NonCopyable{
+namespace glc {
+    class VertexBuffer : public Resource{
     public:
-        GLuint id{};
         VertexBuffer();
         ~VertexBuffer();
         void bind(GLenum target);
     };
 
-    class VertexArray : private NonCopyable{
+    class VertexArray : public Resource{
     public:
-        GLuint id{};
         VertexArray();
         ~VertexArray();
         void bind();

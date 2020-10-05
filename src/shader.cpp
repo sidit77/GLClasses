@@ -3,9 +3,11 @@
 #include <fstream>
 #include <sstream>
 
-using namespace wangtiles;
+using namespace glc;
 
-Shader::Shader(const std::string& path, GLenum type) : id(glCreateShader(type)) {
+Shader::Shader(const std::string& path, GLenum type) {
+    id = glCreateShader(type);
+
     std::ifstream file;
     file.exceptions (std::ifstream::failbit | std::ifstream::badbit);
     try{
@@ -37,7 +39,9 @@ Shader::~Shader() {
     glDeleteShader(id);
 }
 
-Program::Program(std::initializer_list<std::shared_ptr<Shader>> shaders) : id(glCreateProgram()) {
+Program::Program(std::initializer_list<std::shared_ptr<Shader>> shaders) {
+    id = glCreateProgram();
+
     for(const auto& shader : shaders){
         glAttachShader(id, shader->id);
     }

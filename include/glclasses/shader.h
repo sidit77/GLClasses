@@ -1,24 +1,20 @@
 #pragma once
 
-#include <glad/glad.h>
 #include <initializer_list>
 #include <utility>
 #include <string>
 #include <memory>
-#include "noncopyable.h"
+#include "resource.h"
 
-namespace wangtiles {
+namespace glc {
 
-    class Shader : private NonCopyable{
+    class Shader : public Resource{
     public:
-        GLuint id;
         Shader(const std::string&, GLenum);
         ~Shader();
     };
 
-    class Program : private NonCopyable{
-    private:
-        GLuint id;
+    class Program : public Resource{
     public:
         Program(std::initializer_list<std::shared_ptr<Shader>> shaders);
         ~Program();
