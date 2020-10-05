@@ -1,0 +1,4 @@
+[submodule "stb"]
+	path = libs/stb
+	url = https://github.com/nothings/stb.git
+	branch = master
