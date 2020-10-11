@@ -10,6 +10,8 @@ namespace glc::loader {
     public:
         virtual std::string loadString(const std::string& path);
         virtual std::vector<char> loadBytes(const std::string& path);
+        virtual bool writeString(const std::string& path, const std::string& str);
+        virtual bool writeBytes(const std::string& path, std::vector<char> bytes);
         virtual std::string relativePath(const std::string& base, const std::string& path);
     };
 

@@ -47,6 +47,26 @@ std::vector<char> glc::loader::ResourceLoader::loadBytes(const std::string &path
     return std::vector<char>(0);
 }
 
+bool glc::loader::ResourceLoader::writeString(const std::string &path, const std::string &str) {
+    std::ofstream file (path);
+    if (file.is_open())    {
+        file << str;
+        file.close();
+        return true;
+    }
+    return false;
+}
+
+bool glc::loader::ResourceLoader::writeBytes(const std::string &path, std::vector<char> bytes) {
+    std::ofstream file (path, std::ios::out | std::ios::binary);
+    if (file.is_open())    {
+        file.write(bytes.data(), bytes.size());
+        file.close();
+        return true;
+    }
+    return false;
+}
+
 std::string glc::loader::ResourceLoader::relativePath(const std::string &base, const std::string &path) {
     return std::filesystem::path(base).remove_filename().concat(path).string();
 }
