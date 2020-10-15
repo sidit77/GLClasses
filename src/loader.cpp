@@ -121,6 +121,7 @@ std::unique_ptr<glc::Texture> glc::loader::loadResource<>(const std::string &pat
     auto data = loader.loadBytes(path);
 
     int width, height, nrChannels;
+    stbi_set_flip_vertically_on_load(false);
     stbi_uc *texdata = stbi_load_from_memory((const stbi_uc*)data.data(), data.size(), &width, &height, &nrChannels, 0);
     if(texdata) {
         auto texture = std::make_unique<glc::Texture>(width, height, getSizedFormat(nrChannels));
