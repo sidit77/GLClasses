@@ -23,6 +23,12 @@ namespace glc {
         explicit Texture2DArray(GLsizei width, GLsizei height, GLsizei depth, GLenum format);
         explicit Texture2DArray(GLsizei width, GLsizei height, GLsizei depth, GLenum format, GLsizei levels);
     };
+
+    class Texture1D : public Texture {
+    public:
+        explicit Texture1D(GLsizei width, GLenum format);
+        explicit Texture1D(GLsizei width, GLenum format, GLsizei levels);
+    };
 }
 
 

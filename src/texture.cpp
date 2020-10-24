@@ -33,3 +33,9 @@ Texture2DArray::Texture2DArray(GLsizei width, GLsizei height, GLsizei depth, GLe
 }
 
 Texture2DArray::Texture2DArray(GLsizei width, GLsizei height, GLsizei depth, GLenum format) : Texture2DArray(width, height, depth, format, getLevels(width, height)) {}
+
+Texture1D::Texture1D(GLsizei width, GLenum format) : Texture1D(width, format, getLevels(width, 0)){}
+
+Texture1D::Texture1D(GLsizei width, GLenum format, GLsizei levels) : Texture(GL_TEXTURE_1D){
+    glTextureStorage1D(id, levels, format, width);
+}
