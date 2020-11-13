@@ -124,7 +124,7 @@ std::unique_ptr<glc::Texture> glc::loader::loadResource<>(const std::string &pat
     stbi_set_flip_vertically_on_load(false);
     stbi_uc *texdata = stbi_load_from_memory((const stbi_uc*)data.data(), data.size(), &width, &height, &nrChannels, 0);
     if(texdata) {
-        auto texture = std::make_unique<glc::Texture2D>(width, height, getSizedFormat(nrChannels));
+        auto texture = std::make_unique<glc::Texture>(glc::createTexture2D(width, height, getSizedFormat(nrChannels)));
         glTextureSubImage2D(texture->id, 0, 0, 0, width, height, getFormat(nrChannels), GL_UNSIGNED_BYTE, texdata);
         glGenerateTextureMipmap(texture->id);
         glTextureParameteri(texture->id, GL_TEXTURE_WRAP_S, GL_REPEAT);

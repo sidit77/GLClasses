@@ -7,7 +7,8 @@ VertexBuffer::VertexBuffer(){
 }
 
 VertexBuffer::~VertexBuffer() {
-    glDeleteBuffers(1, &id);
+    if(id != 0)
+        glDeleteBuffers(1, &id);
 }
 
 void VertexBuffer::bind(GLenum target) {
@@ -19,7 +20,8 @@ VertexArray::VertexArray() {
 }
 
 VertexArray::~VertexArray() {
-    glDeleteVertexArrays(1, &id);
+    if(id != 0)
+        glDeleteVertexArrays(1, &id);
 }
 
 void VertexArray::bind() {

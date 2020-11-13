@@ -17,15 +17,15 @@ namespace glc {
 
     class Shader : public Resource{
     public:
-        Shader(std::string source, ShaderType type);
-        ~Shader();
+        Shader(const std::string& source, ShaderType type);
+        ~Shader() override;
     };
 
     class Program : public Resource{
     public:
         Program();
 
-        ~Program();
+        ~Program() override;
         void bind();
         GLint getUniformLocation(const std::string& name);
     };
@@ -34,7 +34,6 @@ namespace glc {
     public:
         ProgramBuilder() = default;
         ProgramBuilder(std::initializer_list<Shader*> shader);
-        ~ProgramBuilder() = default;
         ProgramBuilder& link();
         ProgramBuilder& attachShader(Shader* shader);
     };

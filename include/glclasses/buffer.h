@@ -6,14 +6,14 @@ namespace glc {
     class VertexBuffer : public Resource{
     public:
         VertexBuffer();
-        ~VertexBuffer();
+        ~VertexBuffer() override;
         void bind(GLenum target);
     };
 
     class VertexArray : public Resource{
     public:
         VertexArray();
-        ~VertexArray();
+        ~VertexArray() override;
         void bind();
     };
 
