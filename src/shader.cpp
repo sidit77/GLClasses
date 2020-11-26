@@ -245,3 +245,29 @@ template<>
 void Program::setUniformMatrix<GLdouble, 4, 3>(GLint location, GLsizei count, GLboolean transpose, const GLdouble *v0) {
     glProgramUniformMatrix4x3dv(id, location, count, transpose, v0);
 }
+
+
+template<typename T>
+void Program::getUniform(GLint location, T* params) {
+    static_assert(false, "type not supported!");
+}
+
+template<>
+void Program::getUniform(GLint location, GLfloat* params) {
+    glGetUniformfv(id, location, params);
+}
+
+template<>
+void Program::getUniform(GLint location, GLdouble* params) {
+    glGetUniformdv(id, location, params);
+}
+
+template<>
+void Program::getUniform(GLint location, GLint* params) {
+    glGetUniformiv(id, location, params);
+}
+
+template<>
+void Program::getUniform(GLint location, GLuint* params) {
+    glGetUniformuiv(id, location, params);
+}

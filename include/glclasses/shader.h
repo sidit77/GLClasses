@@ -133,6 +133,87 @@ namespace glc {
             setUniformMatrix<T, N, M>(getUniformLocation(name), count, transpose, v0);
         }
 
+        template<typename T>
+        void getUniform(GLint location, T* params);
+
+#ifdef GLC_GLM_PRESENT
+
+        template<typename T, glm::precision P>
+        void getUniform(GLint location, glm::tvec2<T, P>* vec){
+            getUniform(location, glm::value_ptr(*vec));
+        }
+        template<typename T, glm::precision P>
+        void getUniform(GLint location, glm::tvec3<T, P>* vec){
+            getUniform(location, glm::value_ptr(*vec));
+        }
+        template<typename T, glm::precision P>
+        void getUniform(GLint location, glm::tvec4<T, P>* vec){
+            getUniform(location, glm::value_ptr(*vec));
+        }
+
+        template<typename T, glm::precision P>
+        void getUniform(GLint location, glm::tmat2x2<T, P>* mat){
+            getUniform(location, glm::value_ptr(*mat));
+        }
+
+        template<typename T, glm::precision P>
+        void getUniform(GLint location, glm::tmat3x3<T, P>* mat){
+            getUniform(location, glm::value_ptr(*mat));
+        }
+
+        template<typename T, glm::precision P>
+        void getUniform(GLint location, glm::tmat4x4<T, P>* mat){
+            getUniform(location, glm::value_ptr(*mat));
+        }
+
+        template<typename T, glm::precision P>
+        void getUniform(GLint location, glm::tmat2x3<T, P>* mat){
+            getUniform(location, glm::value_ptr(*mat));
+        }
+
+        template<typename T, glm::precision P>
+        void getUniform(GLint location, glm::tmat3x2<T, P>* mat){
+            getUniform(location, glm::value_ptr(*mat));
+        }
+
+        template<typename T, glm::precision P>
+        void getUniform(GLint location, glm::tmat2x4<T, P>* mat){
+            getUniform(location, glm::value_ptr(*mat));
+        }
+
+        template<typename T, glm::precision P>
+        void getUniform(GLint location, glm::tmat4x2<T, P>* mat){
+            getUniform(location, glm::value_ptr(*mat));
+        }
+
+        template<typename T, glm::precision P>
+        void getUniform(GLint location, glm::tmat4x3<T, P>* mat){
+            getUniform(location, glm::value_ptr(*mat));
+        }
+
+        template<typename T, glm::precision P>
+        void getUniform(GLint location, glm::tmat3x4<T, P>* mat){
+            getUniform(location, glm::value_ptr(*mat));
+        }
+#endif
+
+        template<typename T>
+        T getUniform(GLint location){
+            T t;
+            getUniform(location, &t);
+            return t;
+        }
+
+        template<typename T>
+        void getUniform(const std::string& name, T* params){
+            getUniform(getUniformLocation(name), params);
+        }
+
+        template<typename T>
+        T getUniform(const std::string& name){
+            return getUniform<T>(getUniformLocation(name));
+        }
+
     };
 
     class ProgramBuilder : public Program{
