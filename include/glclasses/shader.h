@@ -7,7 +7,7 @@
 #include "resource.h"
 
 #if __has_include(<glm/glm.hpp>)
-#define GLC_GLM_PRESENT TRUE
+#define GLC_GLM_PRESENT
 #include <glm/glm.hpp>
 #include <glm/gtc/type_ptr.hpp>
 #endif
@@ -53,7 +53,7 @@ namespace glc {
             setUniform<T, 1>(location, 1, &v);
         }
 
-#if GLC_GLM_PRESENT
+#ifdef GLC_GLM_PRESENT
         template<typename T, glm::precision P>
         void setUniform(GLint location, const glm::tvec2<T, P>& vec){
             setUniform<T, 2>(location, 1, glm::value_ptr(vec));
@@ -213,6 +213,8 @@ namespace glc {
         T getUniform(const std::string& name){
             return getUniform<T>(getUniformLocation(name));
         }
+
+        GLint getInfo(GLenum name);
 
     };
 

@@ -36,6 +36,12 @@ void Program::bind() {
     glUseProgram(id);
 }
 
+GLint Program::getInfo(GLenum info) {
+    GLint result;
+    glGetProgramiv(id, info, &result);
+    return result;
+}
+
 GLint Program::getUniformLocation(const std::string& name) {
     return glGetUniformLocation(id, name.c_str());
 }
