@@ -63,3 +63,185 @@ ProgramBuilder& ProgramBuilder::link() {
     }
     return *this;
 }
+
+template<typename T, size_t N>
+void Program::setUniform(GLint location, GLsizei count, const T *v0) {
+    static_assert(false, "type not supported!");
+}
+
+template<>
+void Program::setUniform<GLfloat, 1>(GLint location, GLsizei count, const GLfloat* v0) {
+    glProgramUniform1fv(id, location, count, v0);
+}
+
+template<>
+void Program::setUniform<GLfloat, 2>(GLint location, GLsizei count, const GLfloat* v0) {
+    glProgramUniform2fv(id, location, count, v0);
+}
+
+template<>
+void Program::setUniform<GLfloat, 3>(GLint location, GLsizei count, const GLfloat* v0) {
+    glProgramUniform3fv(id, location, count, v0);
+}
+
+template<>
+void Program::setUniform<GLfloat, 4>(GLint location, GLsizei count, const GLfloat* v0) {
+    glProgramUniform4fv(id, location, count, v0);
+}
+
+template<>
+void Program::setUniform<GLdouble, 1>(GLint location, GLsizei count, const GLdouble* v0) {
+    glProgramUniform1dv(id, location, count, v0);
+}
+
+template<>
+void Program::setUniform<GLdouble, 2>(GLint location, GLsizei count, const GLdouble* v0) {
+    glProgramUniform2dv(id, location, count, v0);
+}
+
+template<>
+void Program::setUniform<GLdouble, 3>(GLint location, GLsizei count, const GLdouble* v0) {
+    glProgramUniform3dv(id, location, count, v0);
+}
+
+template<>
+void Program::setUniform<GLdouble, 4>(GLint location, GLsizei count, const GLdouble* v0) {
+    glProgramUniform4dv(id, location, count, v0);
+}
+
+template<>
+void Program::setUniform<GLuint, 1>(GLint location, GLsizei count, const GLuint* v0) {
+    glProgramUniform1uiv(id, location, count, v0);
+}
+
+template<>
+void Program::setUniform<GLuint, 2>(GLint location, GLsizei count, const GLuint* v0) {
+    glProgramUniform2uiv(id, location, count, v0);
+}
+
+template<>
+void Program::setUniform<GLuint, 3>(GLint location, GLsizei count, const GLuint* v0) {
+    glProgramUniform3uiv(id, location, count, v0);
+}
+
+template<>
+void Program::setUniform<GLuint, 4>(GLint location, GLsizei count, const GLuint* v0) {
+    glProgramUniform4uiv(id, location, count, v0);
+}
+
+template<>
+void Program::setUniform<GLint, 1>(GLint location, GLsizei count, const GLint* v0) {
+    glProgramUniform1iv(id, location, count, v0);
+}
+
+template<>
+void Program::setUniform<GLint, 2>(GLint location, GLsizei count, const GLint* v0) {
+    glProgramUniform2iv(id, location, count, v0);
+}
+
+template<>
+void Program::setUniform<GLint, 3>(GLint location, GLsizei count, const GLint* v0) {
+    glProgramUniform3iv(id, location, count, v0);
+}
+
+template<>
+void Program::setUniform<GLint, 4>(GLint location, GLsizei count, const GLint* v0) {
+    glProgramUniform4iv(id, location, count, v0);
+}
+
+
+template<typename T, size_t N, size_t M>
+void Program::setUniformMatrix(GLint location, GLsizei count, GLboolean transpose, const T *v0) {
+    static_assert(false, "type not supported!");
+}
+
+template<>
+void Program::setUniformMatrix<GLfloat, 2, 2>(GLint location, GLsizei count, GLboolean transpose, const GLfloat *v0) {
+    glProgramUniformMatrix2fv(id, location, count, transpose, v0);
+}
+
+template<>
+void Program::setUniformMatrix<GLfloat, 3, 3>(GLint location, GLsizei count, GLboolean transpose, const GLfloat *v0) {
+    glProgramUniformMatrix3fv(id, location, count, transpose, v0);
+}
+
+template<>
+void Program::setUniformMatrix<GLfloat, 4, 4>(GLint location, GLsizei count, GLboolean transpose, const GLfloat *v0) {
+    glProgramUniformMatrix4fv(id, location, count, transpose, v0);
+}
+
+template<>
+void Program::setUniformMatrix<GLfloat, 2, 3>(GLint location, GLsizei count, GLboolean transpose, const GLfloat *v0) {
+    glProgramUniformMatrix2x3fv(id, location, count, transpose, v0);
+}
+
+template<>
+void Program::setUniformMatrix<GLfloat, 3, 2>(GLint location, GLsizei count, GLboolean transpose, const GLfloat *v0) {
+    glProgramUniformMatrix3x2fv(id, location, count, transpose, v0);
+}
+
+template<>
+void Program::setUniformMatrix<GLfloat, 2, 4>(GLint location, GLsizei count, GLboolean transpose, const GLfloat *v0) {
+    glProgramUniformMatrix2x4fv(id, location, count, transpose, v0);
+}
+
+template<>
+void Program::setUniformMatrix<GLfloat, 4, 2>(GLint location, GLsizei count, GLboolean transpose, const GLfloat *v0) {
+    glProgramUniformMatrix4x2fv(id, location, count, transpose, v0);
+}
+
+template<>
+void Program::setUniformMatrix<GLfloat, 3, 4>(GLint location, GLsizei count, GLboolean transpose, const GLfloat *v0) {
+    glProgramUniformMatrix3x4fv(id, location, count, transpose, v0);
+}
+
+template<>
+void Program::setUniformMatrix<GLfloat, 4, 3>(GLint location, GLsizei count, GLboolean transpose, const GLfloat *v0) {
+    glProgramUniformMatrix4x3fv(id, location, count, transpose, v0);
+}
+
+
+template<>
+void Program::setUniformMatrix<GLdouble, 2, 2>(GLint location, GLsizei count, GLboolean transpose, const GLdouble *v0) {
+    glProgramUniformMatrix2dv(id, location, count, transpose, v0);
+}
+
+template<>
+void Program::setUniformMatrix<GLdouble, 3, 3>(GLint location, GLsizei count, GLboolean transpose, const GLdouble *v0) {
+    glProgramUniformMatrix3dv(id, location, count, transpose, v0);
+}
+
+template<>
+void Program::setUniformMatrix<GLdouble, 4, 4>(GLint location, GLsizei count, GLboolean transpose, const GLdouble *v0) {
+    glProgramUniformMatrix4dv(id, location, count, transpose, v0);
+}
+
+template<>
+void Program::setUniformMatrix<GLdouble, 2, 3>(GLint location, GLsizei count, GLboolean transpose, const GLdouble *v0) {
+    glProgramUniformMatrix2x3dv(id, location, count, transpose, v0);
+}
+
+template<>
+void Program::setUniformMatrix<GLdouble, 3, 2>(GLint location, GLsizei count, GLboolean transpose, const GLdouble *v0) {
+    glProgramUniformMatrix3x2dv(id, location, count, transpose, v0);
+}
+
+template<>
+void Program::setUniformMatrix<GLdouble, 2, 4>(GLint location, GLsizei count, GLboolean transpose, const GLdouble *v0) {
+    glProgramUniformMatrix2x4dv(id, location, count, transpose, v0);
+}
+
+template<>
+void Program::setUniformMatrix<GLdouble, 4, 2>(GLint location, GLsizei count, GLboolean transpose, const GLdouble *v0) {
+    glProgramUniformMatrix4x2dv(id, location, count, transpose, v0);
+}
+
+template<>
+void Program::setUniformMatrix<GLdouble, 3, 4>(GLint location, GLsizei count, GLboolean transpose, const GLdouble *v0) {
+    glProgramUniformMatrix3x4dv(id, location, count, transpose, v0);
+}
+
+template<>
+void Program::setUniformMatrix<GLdouble, 4, 3>(GLint location, GLsizei count, GLboolean transpose, const GLdouble *v0) {
+    glProgramUniformMatrix4x3dv(id, location, count, transpose, v0);
+}
