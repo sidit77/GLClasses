@@ -1,4 +1,5 @@
 #include <glclasses/buffer.h>
+#include <glclasses/glerror.h>
 
 using namespace glc;
 
@@ -26,4 +27,11 @@ VertexArray::~VertexArray() {
 
 void VertexArray::bind() {
     glBindVertexArray(id);
+}
+
+Buffer createBuffer(GLsizeiptr size, GLbitfield flags, const void *data) {
+    Buffer buffer;
+    glNamedBufferStorage(buffer.id, size, data, flags);
+    CHECK_GL_ERROR
+    return buffer;
 }

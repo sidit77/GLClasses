@@ -7,13 +7,30 @@ namespace glc {
     public:
         Buffer();
         ~Buffer() override;
+        Buffer(Buffer &&other) noexcept : Resource(std::move(other)){};
+        Buffer& operator=(Buffer &&other) noexcept {
+            if (this == &other)
+                return *this;
+            Resource::operator=(std::move(other));
+            return *this;
+        }
+
         void bind(GLenum target);
     };
+
+    Buffer createBuffer(GLsizeiptr size, GLbitfield flags, const void * data = nullptr);
 
     class VertexArray : public Resource{
     public:
         VertexArray();
         ~VertexArray() override;
+        VertexArray(VertexArray &&other) noexcept : Resource(std::move(other)){};
+        VertexArray& operator=(VertexArray &&other) noexcept {
+            if (this == &other)
+                return *this;
+            Resource::operator=(std::move(other));
+            return *this;
+        }
         void bind();
     };
 
