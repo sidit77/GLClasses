@@ -2,16 +2,16 @@
 
 using namespace glc;
 
-VertexBuffer::VertexBuffer(){
+Buffer::Buffer(){
     glCreateBuffers(1, &id);
 }
 
-VertexBuffer::~VertexBuffer() {
+Buffer::~Buffer() {
     if(id != 0)
         glDeleteBuffers(1, &id);
 }
 
-void VertexBuffer::bind(GLenum target) {
+void Buffer::bind(GLenum target) {
     glBindBuffer(target, id);
 }
 

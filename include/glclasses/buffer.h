@@ -3,10 +3,10 @@
 #include "resource.h"
 
 namespace glc {
-    class VertexBuffer : public Resource{
+    class Buffer : public Resource{
     public:
-        VertexBuffer();
-        ~VertexBuffer() override;
+        Buffer();
+        ~Buffer() override;
         void bind(GLenum target);
     };
 
