@@ -1,5 +1,7 @@
 #include "glclasses/shader.h"
 #include <iostream>
+#include <array>
+#include <vector>
 
 using namespace glc;
 
@@ -76,6 +78,7 @@ template<typename T, size_t N>
 void Program::setUniform(GLint location, GLsizei count, const T *v0) {
     static_assert(false, "type not supported!");
 }
+
 
 template<>
 void Program::setUniform<GLfloat, 1>(GLint location, GLsizei count, const GLfloat* v0) {
@@ -155,6 +158,40 @@ void Program::setUniform<GLint, 3>(GLint location, GLsizei count, const GLint* v
 template<>
 void Program::setUniform<GLint, 4>(GLint location, GLsizei count, const GLint* v0) {
     glProgramUniform4iv(id, location, count, v0);
+}
+
+namespace {
+    std::vector<GLint> btoiTemp;
+    void filltemp(GLsizei count, const bool* v){
+        btoiTemp.clear();
+        for(int i = 0; i < count; i++){
+            btoiTemp.push_back(v[i] ? GL_TRUE : GL_FALSE);
+        }
+    }
+}
+
+template<>
+void Program::setUniform<bool, 1>(GLint location, GLsizei count, const bool* v0) {
+    filltemp(count, v0);
+    setUniform<GLint, 1>(location, count, btoiTemp.data());
+}
+
+template<>
+void Program::setUniform<bool, 2>(GLint location, GLsizei count, const bool* v0) {
+    filltemp(count, v0);
+    setUniform<GLint, 2>(location, count, btoiTemp.data());
+}
+
+template<>
+void Program::setUniform<bool, 3>(GLint location, GLsizei count, const bool* v0) {
+    filltemp(count, v0);
+    setUniform<GLint, 3>(location, count, btoiTemp.data());
+}
+
+template<>
+void Program::setUniform<bool, 4>(GLint location, GLsizei count, const bool* v0) {
+    filltemp(count, v0);
+    setUniform<GLint, 4>(location, count, btoiTemp.data());
 }
 
 
