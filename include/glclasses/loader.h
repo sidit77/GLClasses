@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include <memory>
+#include <optional>
 
 namespace glc::loader {
 
@@ -18,5 +19,5 @@ namespace glc::loader {
     inline ResourceLoader defaultloader;
 
     template<typename T>
-    std::unique_ptr<T> loadResource(const std::string& path, ResourceLoader& loader = defaultloader);
+    std::optional<T> loadResource(const std::string& path, ResourceLoader& loader = defaultloader);
 }

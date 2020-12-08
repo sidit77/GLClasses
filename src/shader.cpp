@@ -46,28 +46,30 @@ GLint Program::getUniformLocation(const std::string& name) {
     return glGetUniformLocation(id, name.c_str());
 }
 
-ProgramBuilder::ProgramBuilder(std::initializer_list<Shader*> shaders) {
-    for(auto& shader : shaders){
-        attachShader(shader);
+
+Program createProgram(std::initializer_list<Shader *> shaders) {
+    ProgramBuilder builder;
+    for(auto shader : shaders){
+        builder.attachShader(shader);
     }
-    link();
+    return builder.link();
 }
 
 ProgramBuilder& ProgramBuilder::attachShader(Shader* shader) {
-    glAttachShader(id, shader->id);
+    glAttachShader(program.id, shader->id);
     return *this;
 }
 
-ProgramBuilder& ProgramBuilder::link() {
-    glLinkProgram(id);
+Program ProgramBuilder::link() {
+    glLinkProgram(program.id);
     int success;
-    glGetProgramiv(id, GL_LINK_STATUS, &success);
+    glGetProgramiv(program.id, GL_LINK_STATUS, &success);
     if(!success){
         char infoLog[512];
-        glGetProgramInfoLog(id, 512, NULL, infoLog);
+        glGetProgramInfoLog(program.id, 512, NULL, infoLog);
         std::cerr << "Linking program has failed: \n" << infoLog << std::endl;
     }
-    return *this;
+    return std::move(program);
 }
 
 template<typename T, size_t N>
@@ -277,3 +279,4 @@ template<>
 void Program::getUniform(GLint location, GLuint* params) {
     glGetUniformuiv(id, location, params);
 }
+

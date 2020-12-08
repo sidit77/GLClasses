@@ -16,6 +16,14 @@ void Buffer::bind(GLenum target) {
     glBindBuffer(target, id);
 }
 
+void Buffer::bindBase(GLenum target, GLuint slot) {
+    glBindBufferBase(target, slot, id);
+}
+
+void Buffer::unmap() {
+    glUnmapNamedBuffer(id);
+}
+
 VertexArray::VertexArray() {
     glCreateVertexArrays(1, &id);
 }
@@ -29,7 +37,7 @@ void VertexArray::bind() {
     glBindVertexArray(id);
 }
 
-Buffer createBuffer(GLsizeiptr size, GLbitfield flags, const void *data) {
+Buffer glc::createBuffer(GLsizeiptr size, GLbitfield flags, const void *data) {
     Buffer buffer;
     glNamedBufferStorage(buffer.id, size, data, flags);
     CHECK_GL_ERROR

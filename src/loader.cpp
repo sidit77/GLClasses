@@ -83,19 +83,17 @@ namespace glc {
 }
 
 template<>
-std::unique_ptr<glc::Program> glc::loader::loadResource<>(const std::string &path, ResourceLoader& loader) {
+std::optional<glc::Program> glc::loader::loadResource<>(const std::string &path, ResourceLoader& loader) {
     auto j = json::parse(loader.loadString(path));
 
-    auto program = std::make_unique<glc::ProgramBuilder>();
-
+    glc::ProgramBuilder program;
     for(auto& shaderdesc : j["shaders"]){
         auto shadersrc = loader.loadString(loader.relativePath(path, shaderdesc["path"].get<std::string>()));
-        auto shader = std::make_unique<glc::Shader>(shadersrc, shaderdesc["type"].get<ShaderType>());
-        program->attachShader(shader.get());
+        Shader shader(shadersrc, shaderdesc["type"].get<ShaderType>());
+        program.attachShader(&shader);
     }
-    program->link();
 
-    return program;
+    return std::optional<glc::Program>(program.link());
 }
 
 GLint getFormat(int channels){
@@ -117,14 +115,14 @@ GLint getSizedFormat(int channels){
 }
 
 template<>
-std::unique_ptr<glc::Texture> glc::loader::loadResource<>(const std::string &path, ResourceLoader& loader) {
+std::optional<glc::Texture> glc::loader::loadResource<>(const std::string &path, ResourceLoader& loader) {
     auto data = loader.loadBytes(path);
 
     int width, height, nrChannels;
     stbi_set_flip_vertically_on_load(false);
     stbi_uc *texdata = stbi_load_from_memory((const stbi_uc*)data.data(), data.size(), &width, &height, &nrChannels, 0);
     if(texdata) {
-        auto texture = std::make_unique<glc::Texture>(glc::createTexture2D(width, height, getSizedFormat(nrChannels)));
+        auto texture = std::optional<glc::Texture>(glc::createTexture2D(width, height, getSizedFormat(nrChannels)));
         glTextureSubImage2D(texture->id, 0, 0, 0, width, height, getFormat(nrChannels), GL_UNSIGNED_BYTE, texdata);
         glGenerateTextureMipmap(texture->id);
         glTextureParameteri(texture->id, GL_TEXTURE_WRAP_S, GL_REPEAT);
@@ -136,6 +134,6 @@ std::unique_ptr<glc::Texture> glc::loader::loadResource<>(const std::string &pat
     }else{
         std::cerr << "Could not load image from memory" << std::endl;
     }
-    return nullptr;
+    return std::nullopt;
 }
 

@@ -14,8 +14,15 @@ namespace glc {
             Resource::operator=(std::move(other));
             return *this;
         }
-
         void bind(GLenum target);
+        void bindBase(GLenum target, GLuint slot);
+
+        template<typename T>
+        T* map(GLenum access){
+            return (T*)glMapNamedBuffer(id, access);
+        }
+
+        void unmap();
     };
 
     Buffer createBuffer(GLsizeiptr size, GLbitfield flags, const void * data = nullptr);

@@ -27,13 +27,26 @@ namespace glc {
     public:
         Shader(const std::string& source, ShaderType type);
         ~Shader() override;
+        Shader(Shader &&other) noexcept : Resource(std::move(other)){};
+        Shader& operator=(Shader &&other) noexcept {
+            if (this == &other)
+                return *this;
+            Resource::operator=(std::move(other));
+            return *this;
+        }
     };
 
     class Program : public Resource{
     public:
         Program();
-
         ~Program() override;
+        Program(Program &&other) noexcept : Resource(std::move(other)){};
+        Program& operator=(Program &&other) noexcept {
+            if (this == &other)
+                return *this;
+            Resource::operator=(std::move(other));
+            return *this;
+        }
         void bind();
         GLint getUniformLocation(const std::string& name);
 
@@ -218,14 +231,16 @@ namespace glc {
 
     };
 
-    class ProgramBuilder : public Program{
+    class ProgramBuilder{
+    private:
+        Program program;
     public:
         ProgramBuilder() = default;
-        ProgramBuilder(std::initializer_list<Shader*> shader);
-        ProgramBuilder& link();
+        Program link();
         ProgramBuilder& attachShader(Shader* shader);
     };
 
+    Program createProgram(std::initializer_list<Shader*> shader);
 
 
 }
