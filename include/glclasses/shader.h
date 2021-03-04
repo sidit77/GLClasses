@@ -12,6 +12,12 @@
 #include <glm/gtc/type_ptr.hpp>
 #endif
 
+#if __has_include(<glm.hpp>)
+#define GLC_GLM_PRESENT
+#include <glm.hpp>
+#include <gtc/type_ptr.hpp>
+#endif
+
 namespace glc {
 
     enum ShaderType : GLenum {
