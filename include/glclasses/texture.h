@@ -20,7 +20,7 @@ namespace glc {
             Resource::operator=(std::move(other));
             return *this;
         }
-        void bind(GLenum slot);
+        void bind(GLenum slot) const;
     };
 
     Texture createTexture2D(GLsizei width, GLsizei height, GLenum format);

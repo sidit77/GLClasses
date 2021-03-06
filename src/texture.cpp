@@ -21,7 +21,7 @@ Texture::~Texture() {
         glDeleteTextures(1, &id);
 }
 
-void Texture::bind(GLenum slot) {
+void Texture::bind(GLenum slot) const {
     glActiveTexture(slot);
     glBindTexture(target, id);
     CHECK_GL_ERROR
