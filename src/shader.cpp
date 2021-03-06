@@ -5,7 +5,7 @@
 
 using namespace glc;
 
-Shader::Shader(const std::string& source, ShaderType type) {
+Shader::Shader(const std::string& source, ShaderType type) : Resource(GL_SHADER){
     id = glCreateShader(type);
 
     const char *c_str = source.c_str();
@@ -25,7 +25,7 @@ Shader::~Shader() {
         glDeleteShader(id);
 }
 
-Program::Program() {
+Program::Program() : Resource(GL_PROGRAM){
     id = glCreateProgram();
 }
 

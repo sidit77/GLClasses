@@ -3,7 +3,7 @@
 
 using namespace glc;
 
-Buffer::Buffer(){
+Buffer::Buffer() : Resource(GL_BUFFER){
     glCreateBuffers(1, &id);
 }
 
@@ -24,7 +24,7 @@ void Buffer::unmap() {
     glUnmapNamedBuffer(id);
 }
 
-VertexArray::VertexArray() {
+VertexArray::VertexArray() : Resource(GL_VERTEX_ARRAY){
     glCreateVertexArrays(1, &id);
 }
 

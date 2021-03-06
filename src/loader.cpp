@@ -123,12 +123,11 @@ std::optional<glc::Texture> glc::loader::loadResource<>(const std::string &path,
     stbi_uc *texdata = stbi_load_from_memory((const stbi_uc*)data.data(), data.size(), &width, &height, &nrChannels, 0);
     if(texdata) {
         auto texture = std::optional<glc::Texture>(glc::createTexture2D(width, height, getSizedFormat(nrChannels)));
-        glTextureSubImage2D(texture->id, 0, 0, 0, width, height, getFormat(nrChannels), GL_UNSIGNED_BYTE, texdata);
-        glGenerateTextureMipmap(texture->id);
-        glTextureParameteri(texture->id, GL_TEXTURE_WRAP_S, GL_REPEAT);
-        glTextureParameteri(texture->id, GL_TEXTURE_WRAP_T, GL_REPEAT);
-        glTextureParameteri(texture->id, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
-        glTextureParameteri(texture->id, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        texture->setSubImage2D( 0, getFormat(nrChannels), texdata);
+        texture->generateMipmaps();
+
+        texture->setWrapMode(TextureWrapMode::Repeat, TextureWrapMode::Repeat);
+        texture->setFilterMode(TextureFilterModeMin::LinearMipmapLinear, TextureFilterModeMag::Linear);
         stbi_image_free(texdata);
         return texture;
     }else{
